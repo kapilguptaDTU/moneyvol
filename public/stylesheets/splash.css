@@ -1,0 +1,178 @@
+.sqzme-content {  /* override for splash */
+    padding: 32px 10px 0em 10px;
+  }
+  
+  .sqzme-container {
+    background-color: rgb(42,54,60);
+  } 
+  
+  #text-box {
+    padding-top: 50px;
+    text-align: center;
+    color: rgb(42,54,60);
+  }
+  
+  #svg-box {
+    display: none;
+    margin-right: 5px;
+    margin-left -15px;
+  }
+  
+  svg {
+    font: 10px OpenSans;
+    text-anchor: left;
+    display: block;
+    margin: auto;
+  }
+  
+  #bulb-box {
+    text-align: center;
+    float: left;
+    width: 100%;  /* overridden by inline (50%) if session not authorized */
+    margin: 12% 0 0 0;
+  }
+  
+  #login-box {
+    display: none;  /* overridden by inline (block) in session not authorized */
+    float: left;
+    width: 50%;
+    margin: 12% 0 0 0;
+  }
+  
+  .sqzme-splash-login {
+    text-align: center;  /* this centers the login button */
+    float: left;
+    margin: auto;
+    margin-top: 5%;
+    color: white;
+    text-shadow: 1px 1px #20245d;
+  }
+  
+  .sqzme-splash-login .pure-control-group input {  /* this centers the form */
+    margin: auto;
+    color: black;
+  }
+  
+  .sqzme-splash-quote {
+    display: none;
+    color: lightgray;
+    font-weight: 100;
+    opacity: 0;
+  }
+  
+  .quotation-mark {
+    color: rgb(52,63,70);
+    font-size: 2em;
+  }
+  
+  @media (max-width: 48em) {
+    #login-box {
+      margin: auto;
+      margin-top: 2em;
+      width: 100%;
+      text-align: center;
+    }
+    #bulb-box {
+      margin: auto;
+      margin-top: 2em;
+      width: 100% !important;
+      text-align: center;
+    }
+    h1 .play {
+      font-size: 5em !important;
+    }
+    .sqzme-splash-login {
+      text-align: center;
+    }
+    .sqzme-splash-quote {
+      font-size:0.75em;
+    }
+  }
+  
+  .sqzme-splash-button {
+    display: block; /* stack one on top of the other */
+    width: 20em;
+    margin: auto;
+    margin-top: 10px;
+    background: rgb(52,63,70) !important;
+    font-family: OpenSans;
+    color: white !important;
+    padding: 1em 3.1em !important;
+    border-radius: 10px;
+    transition: all 0.25s ease;
+  }
+  
+  .sqzme-splash-button:hover {
+    background: white !important;
+    color: rgb(63,81,90) !important;
+  }
+  
+  @keyframes glow {
+    0% {color: rgb(240,243,245);
+        text-shadow: 0px 0px 50px hsl(60,100%,95%);}
+    50% {text-shadow: 0px 0px 80px hsl(60,100%,95%);}
+    100% {text-shadow: 0px 0px 50px hsl(60,100%,95%);}
+  }
+  
+  h1 {
+    margin: 5px 0;
+  }
+  
+  h1 .play {
+    color: rgb(240,243,245);
+    text-shadow: 0px 0px 50px hsl(60,100%,90%);
+    font-size: 4em;
+    font-size: 15vw;
+    animation-name: glow;
+    animation-duration: 7s;
+    animation-delay: 0s;
+    animation-iteration-count: infinite;
+    animation-fill-mode: forwards;
+    cursor: pointer;
+  }
+  
+  .play:hover {
+    text-shadow: 0px 0px 90px hsl(65,100%,90%) !important;
+  }
+  
+  .dark-path {
+    stroke: rgb(42,54,60);
+    fill: none;
+  }
+  
+  .circuit-path {
+    stroke: hsl(195,66%,55%);
+    fill: none;
+  }
+  
+  .circuit-node {
+    fill: hsl(195,66%,55%);
+  }
+  
+  .circuit-node-center {
+    fill: hsl(88,51%,86%);
+  }
+  
+  svg text {
+    fill: rgb(42,54,60);
+  }
+  
+  .text2 {
+    text-anchor: middle;
+  }
+  
+  .cpu-line {
+    stroke: hsl(88,51%,86%);
+    opacity: 0;
+  }
+  
+  .zap-path {
+    stroke: hsl(88,51%,86%);
+    fill: none;
+  }
+  .more-button {
+    cursor: pointer;
+    stroke: hsl(195,66%,55%);
+    fill: rgba(62,171,218,0);
+    opacity: 0;
+  }

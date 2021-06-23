@@ -1,0 +1,401 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>MoneyVol- Track Vol Like Never Before</title>
+    <meta name="description" content="MoneyVol: Track Nifty and Bank Nifty's realized vs implied vol">
+    <meta name="author" content="MoneyVol: Track Nifty and Bank Nifty's realized vs implied vol">
+    <meta property="og:title" content="MoneyVol: Track Nifty and Bank Nifty's realized vs implied vol">
+    <meta property="og:description" content="MoneyVol: Track Nifty and Bank Nifty's realized vs implied vol">
+    <meta property="og:image" content="https://trackcorona-images.s3.amazonaws.com/map.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MoneyVol: Track Nifty and Bank Nifty's realized vs implied vol">
+    <meta name="twitter:description" content="MoneyVol: Track Nifty and Bank Nifty's realized vs implied vol">
+    <meta name="twitter:image" content="https://trackcorona-images.s3.amazonaws.com/map.png">
+    
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <title>MoneyVol: Track Nifty and Bank Nifty's realized vs implied vol</title>
+    
+    <style>
+   
+   @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+    body{
+          color:#3D5170;
+          font-family: 'Poppins', sans-serif;
+        }
+
+    .stats .curr_stat .row
+    {
+       height:10rem;
+    }
+</style>
+  </head>
+  <body>
+  
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+
+                                                                                                                                   
+    
+
+
+  <a class="navbar-brand" href="/">MONEYVOL</a>
+  
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+  
+    <span class="navbar-toggler-icon"></span>
+  
+  </button>
+  
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+  
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active px-3" href="/niftyvomma">NIFTY VOMMA<span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link active px-3" href="/">HOME<span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link active px-3" href="/niftyvomma/">VOMMA<span class="sr-only">(current)</span></a>
+      
+    </div>
+  
+  </div>
+
+</nav>
+    
+
+<div class="container-fluid mt-4">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">TODAY'S STATS  | NIFTY</h1>
+        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm"><i class="fa fa-pencil" aria-hidden="true"></i>
+ Last Update 1 Hour Ago</a>
+    </div>
+
+     <div class="row">
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left border-info shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="h4 text-xs font-weight-bold text-info text-uppercase mb-1">SPOT NIFTY</div>
+                      <div class="h4 mb-0 font-weight-bold text-gray-800 ml-4" >
+                          <span id="conf"></span>
+                        <span class="deltaconfirmed badge badge-light">
+                            <span class="text-info text-bold" id="conf-plus">
+                            </span>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fa fa-check-circle fa-4x text-info" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left border-info shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="h4 text-xs font-weight-bold text-info text-uppercase mb-1">REALIZED VOL</div>
+                      <div class="h4 mb-0 font-weight-bold text-gray-800 ml-4" >
+                          <span id="act"></span>
+                        <span class="deltaconfirmed badge badge-light">
+                            <span class="text-info text-bold" id="act-plus">
+                           
+                            </span>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fa fa-medkit fa-4x text-info" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left border-info shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="h4 text-xs font-weight-bold text-info text-uppercase mb-1" >IMPLIED VOL</div>
+                      <div class="h4 mb-0 font-weight-bold text-gray-800 ml-4"  >
+                          <span id="rec"></span>
+                        <span class="deltaconfirmed badge badge-light">
+                            <span class="text-info text-bold"id="rec-plus">
+                            </span>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fa fa-smile-o fa-4x text-info" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+                                                            
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left border-danger shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="h4 text-xs font-weight-bold text-danger text-uppercase mb-1">DIFFERENCE B/W IMPLIED AND REALIZED</div>
+                      <div class="h4 mb-0 font-weight-bold text-gray-800 ml-4">
+                        <span id="dec"></span>
+                        <span class="deltaconfirmed badge badge-light" >
+                            <span class="text-danger text-bold"id="dec-plus">
+                            </span>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fa fa-user fa-4x text-danger" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+     </div>
+    <!-- CHART STARTS HERE -->
+    <div class="row">
+
+            <div class="col-xl-8 col-lg-7">
+              <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold">REALIZED VS IMPLIED</h6>
+                </div>
+                <div class="card-body">
+                  <div class="chart-area">
+                    <canvas id="myChart"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+             <div class="col-xl-4 col-lg-5">
+              <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold">Daily Analysis</h6>
+                </div>
+                <div class="card-body">
+                  <div class="chart-pie pt-4 pb-2">
+                    <canvas id="myappChart"></canvas>
+                  </div>
+                  <div class="mt-4 text-center small">
+
+
+                    <h5>Latest Updates Of Last 24 Hours</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+    </div>
+
+</div>
+
+<script>
+var times = [];
+   var decay_our_straddle = [];
+    var decay_ratio_straddle = [];
+    var spot_price  = [];
+    var rawdata=<%- JSON.stringify(data_nifty) %>;
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var rec=document.getElementById('rec');
+    var rec_plus=document.getElementById('rec-plus');
+    var act=document.getElementById('act');
+    var act_plus=document.getElementById('act-plus');
+    var dec=document.getElementById('dec');
+    var dec_plus=document.getElementById('dec-plus');
+    var conf=document.getElementById('conf');
+    var conf_plus=document.getElementById('conf-plus');
+    var a=0;
+    var b=0;
+    var c=0;
+    
+    async function getData(){
+      rawdata.forEach(row => {
+            times.push(row['TIME_STRING'])
+            decay_our_straddle.push(row['DECAY OF OUR STRADDLE'])
+            decay_ratio_straddle.push(row['DECAY OF RATIO STRADDLE'])
+            spot_price.push(row['SPOT PRICE'])
+          });
+       times= times.slice(1,100)
+       decay_our_straddle= decay_our_straddle.slice(1,100)
+       decay_ratio_straddle= decay_ratio_straddle.slice(1,100)
+       spot_price= spot_price.slice(1,100)
+       a=spot_price[spot_price.length-1]
+       conf.innerHTML=a
+       b=decay_our_straddle[spot_price.length-1]
+       act.innerHTML=b
+       c=decay_ratio_straddle[spot_price.length-1]
+       rec.innerHTML=c   
+       d= parseFloat(act.innerHTML)-parseFloat(rec.innerHTML)
+       dec.innerHTML=d
+    }
+async function renderChartMain(){
+  await getData();
+
+var chart = new Chart(ctx, {
+    type: 'line',
+
+    data: 
+    {
+        labels: times,
+        datasets: [{
+            label: 'REALIZED DECAY',
+            backgroundColor: 'rgba(75,192,192,0.6)',
+            borderColor: 'rgba(75,192, 192, 0.6)',
+            data: decay_our_straddle,
+            yAxisID: 'y-axis-1'
+        },
+        {
+            label: 'IMPLIED DECAY',
+            backgroundColor: 'rgba(54, 162, 235, 0.6)',
+            borderColor: 'rgba(54, 162, 235, 0.6)',
+            data: decay_ratio_straddle,
+            yAxisID: 'y-axis-1'
+        },
+        {
+            label: 'SPOT PRICE NIFTY',
+            backgroundColor:'rgba(255, 99, 132 )',
+            borderColor: 'rgba(255, 99, 132)',
+            data: spot_price,
+            fill:false,
+            yAxisID: 'y-axis-2'
+        }
+      ]
+    },
+
+    // Configuration options go here
+     options: {
+            responsive: true,
+            // maintainAspectRatio: true,
+
+           scales: {
+      xAxes: [{
+        gridLines: {
+          display: true,
+          drawBorder: false
+        }
+      }],
+      yAxes: [{
+        type: "linear",
+                    display: true,
+                    position: "left",
+                    id: "y-axis-1",
+        gridLines: {
+          color: "rgb(234, 236, 244)",
+          zeroLineColor: "rgb(234, 236, 244)",
+          drawBorder: false,
+          borderDash: [2],
+          zeroLineBorderDash: [2]
+        }
+      },
+      {
+        type: "linear",
+                    display: true,
+                    position: "right",
+                    id: "y-axis-2",
+        gridLines: {
+          color: "rgb(234, 236, 244)",
+          zeroLineColor: "rgb(234, 236, 244)",
+          drawBorder: false,
+          borderDash: [2],
+          zeroLineBorderDash: [2]
+        }
+      }
+    ]
+    }
+    }
+});
+  // a=10;b=10;c=10;
+  var dataArray=[b,c,d];
+var ctx2 = document.getElementById("myappChart").getContext('2d');
+var myChart2 = new Chart(ctx2, {
+  type: 'pie',
+  data: {
+    labels: ["REALIZED VOL", "IMPLIED VOL", "DIFFERENCE"],
+    datasets: [{
+      backgroundColor: [
+        "#17A2BB",
+        "#3498db",
+        "#FF6384"
+      ],
+      data:dataArray
+      // data: [parseInt(dailconf),parseInt(dailrec),parseInt(daildec)]
+    }]
+  }
+});
+
+
+
+
+}
+renderChartMain();
+</script>
+<!-- 
+<script>
+  console.log(parseInt(dailconf));
+  var a=parseInt(dailconf);
+  var b=parseInt(dailrec);
+  var c=parseInt(daildec);
+  
+  a=10;b=10;c=10;
+  var dataArray=[a,b,c];
+var ctx = document.getElementById("myappChart").getContext('2d');
+var myChart = new Chart(ctx, {
+  type: 'pie',
+  data: {
+    labels: ["Confirmed", "Recovered", "Deceased"],
+    datasets: [{
+      backgroundColor: [
+        "#17A2BB",
+        "#3498db",
+        "#FF6384"
+      ],
+      data:dataArray
+      // data: [parseInt(dailconf),parseInt(dailrec),parseInt(daildec)]
+    }]
+  }
+});
+</script>
+<script>
+  setTimeout(function(){ 
+    chart.update();
+    console.log("chart initialized");
+    a=parseInt(dailconf);
+    // a=100;
+    dataArray=[parseInt(dailconf),parseInt(dailrec),parseInt(daildec)];
+    myChart.data.datasets[0].data=[];
+    myChart.data.datasets[0].data=dataArray;
+    
+    myChart.update();
+    // console.log(a) 
+    },
+    300
+    );
+
+  setInterval(function(){ chart.update();myChart.update();console.log("updated") }, 30000);
+
+</script>
+     -->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://use.fontawesome.com/fcfefdb808.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>

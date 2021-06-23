@@ -1,0 +1,701 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="Cache-control" content="public,max-age=86400">
+<title>TrackCorona - COVID-19 Tracker with all states in India</title>
+<meta name="description" content="Track the current impact of the coronavirus pandemic and its spread throughout the world with all states in India">
+<meta name="author" content="TrackCorona">
+<meta property="og:title" content="TrackCorona - COVID-19 Tracker with all states in India">
+<meta property="og:description" content="Track the current impact of the coronavirus pandemic and its spread throughout the world with all states in India">
+<meta property="og:image" content="https://trackcorona-images.s3.amazonaws.com/map.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TrackCorona - COVID-19 Tracker with all states in India">
+<meta name="twitter:description" content="Track the current impact of the coronavirus pandemic and its spread throughout the world with all states in India">
+<meta name="twitter:image" content="https://trackcorona-images.s3.amazonaws.com/map.png">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <title>COVID-19 TRACKER</title>
+    
+    <style>
+   
+   @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+    body{
+          color:#3D5170;
+          font-family: 'Poppins', sans-serif;
+        }
+
+    .stats .curr_stat .row
+    {
+       height:10rem;
+    }
+    .form-inline{
+        margin:50px;
+    }
+    #container {
+    height: 500px; 
+    min-width: 310px; 
+    max-width: 800px; 
+    margin: 0 auto; 
+}
+.loading {
+    margin-top: 10em;
+    text-align: center;
+    color: gray;
+}
+
+</style>
+<script src="https://code.highcharts.com/maps/highmaps.js"></script>
+<script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/mapdata/custom/world-highres.js"></script>
+
+
+  </head>
+  <body>
+  
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+
+                                                                                                                                   
+    
+
+
+  <a class="navbar-brand" href="/">COVID-19 Tracker| WORLD</a>
+  
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+  
+    <span class="navbar-toggler-icon"></span>
+  
+  </button>
+  
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+ 
+        <div class="navbar-nav">
+                <a class="nav-item nav-link active px-3" href="/">India's Stats<span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link active px-3" href="/statewise/">India State wise<span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link active px-3" href="/country/">Country wise<span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link active px-3" href="/news/">News<span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link active px-3" href="/precautions/" target="blank">PRECAUTIONS<span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link active px-3" href="https://codingworld.in/quarantine-a-period-of-remorse-or-a-blessing-in-disguise/" target="blank">BLOG ON QUARANTINE!<span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link active px-3" href="https://forms.gle/hqkJjH9sw4S321qq5" target="blank">PLEASE REVIEW THE WEBSITE!<span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link active px-3" href="https://kapilguptadtu.github.io/Web-Store/" target="blank">WEB STORE (PLAY SOMETHING!)<span class="sr-only">(current)</span></a>
+                
+              </div>
+            
+  
+  </div>
+
+</nav>
+
+<div id="container"></div>
+
+
+
+<h2 style="margin:50px">
+        ATMANIRBHAR COUNTRIES!! :P
+         </h2>
+   
+<form id="input-form" class="form-inline">
+        <div class="form-group mb-2">
+     <strong>  SEARCH INFO ABOUT ANY COUNTRY!</strong>
+        </div>
+        <div class="form-group mx-sm-3 mb-2">
+          <label class="sr-only">country</label>
+          <input type="text" class="form-control" id="input-country" placeholder="Type Country Name!">
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">SEARCH</button>
+      </form>
+
+
+<div class="container-fluid mt-4">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">OVERALL STATS  | <span id="overall-stats-country">INDIA</span></h1>
+        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm"><i class="fa fa-pencil" aria-hidden="true"></i>
+ Last Update 1 Hour Ago!</a>
+    </div>
+
+     <div class="row">
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left border-info shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="h4 text-xs font-weight-bold text-info text-uppercase mb-1">CONFIRMED</div>
+                      <div class="h4 mb-0 font-weight-bold text-gray-800 ml-4" >
+                          <span id="conf"></span>
+                        <span class="deltaconfirmed badge badge-light">
+                            <span class="text-info text-bold" id="conf-plus">
+                            
+                            </span>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fa fa-check-circle fa-4x text-info" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left border-info shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="h4 text-xs font-weight-bold text-info text-uppercase mb-1">ACTIVE</div>
+                      <div class="h4 mb-0 font-weight-bold text-gray-800 ml-4" >
+                          <span id="act"></span>
+                        <span class="deltaconfirmed badge badge-light">
+                            <span class="text-info text-bold" id="act-plus">
+                            
+                            </span>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fa fa-medkit fa-4x text-info" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left border-info shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="h4 text-xs font-weight-bold text-info text-uppercase mb-1" >RECOVERED</div>
+                      <div class="h4 mb-0 font-weight-bold text-gray-800 ml-4"  >
+                          <span id="rec"></span>
+                        <span class="deltaconfirmed badge badge-light">
+                            <span class="text-info text-bold"id="rec-plus">
+                            
+                            </span>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fa fa-smile-o fa-4x text-info" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+                                                            
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left border-danger shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="h4 text-xs font-weight-bold text-danger text-uppercase mb-1">DECEASED</div>
+                      <div class="h4 mb-0 font-weight-bold text-gray-800 ml-4">
+                        <span id="dec"></span>
+                        <span class="deltaconfirmed badge badge-light" >
+                            <span class="text-danger text-bold"id="dec-plus">
+                            
+                            </span>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fa fa-user fa-4x text-danger" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+     </div>
+    <!-- CHART STARTS HERE -->
+    <div class="row">
+
+            <div class="col-xl-8 col-lg-7">
+              <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold">Date wise Reported Cases</h6>
+                </div>
+                <div class="card-body">
+                  <div class="chart-area">
+                    <canvas id="myChart"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+             <div class="col-xl-4 col-lg-5">
+              <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold">Daily Analysis</h6>
+                </div>
+                <div class="card-body">
+                  <div class="chart-pie pt-4 pb-2">
+                    <canvas id="myappChart"></canvas>
+                  </div>
+                  <div class="mt-4 text-center small">
+
+
+                    <h5>Latest Updates Of Last 24 Hours</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+    </div>
+
+</div>
+
+<script>
+    var dates = [];
+    var confirmed = [];
+    var recovered = [];
+    var deceased  = [];
+    var dailrec=0;
+    var dailconf=0;
+    var daildec=0;
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var rec=document.getElementById('rec');
+    var rec_plus=document.getElementById('rec-plus');
+    var act=document.getElementById('act');
+    var act_plus=document.getElementById('act-plus');
+    var dec=document.getElementById('dec');
+    var dec_plus=document.getElementById('dec-plus');
+    var conf=document.getElementById('conf');
+    var conf_plus=document.getElementById('conf-plus');
+     var mainCountry='India'; 
+     var data;
+     var dataarr=[];
+    //  mainCountry=mainCountry.slice(1);
+     var cl=mainCountry.length;
+    //  mainCountry=mainCountry.substring(0, cl-1);
+     console.log(mainCountry);
+    // const url = 'https://api.covid19india.org/data.json';
+    const url = 'https://pomber.github.io/covid19/timeseries.json';
+    async function getInfo(){
+        var response = await fetch(url);
+        data = await response.json();
+//         var len_coundata = data.length;
+//         console.log(len_coundata);
+//         for(var i=0;i<len_coundata;i++){
+        
+// console.log("hello");
+// };
+
+// console.log("yo")
+
+        var series_data = data[mainCountry];
+        var len_data = series_data.length
+        for(var i=len_data-31;i<len_data;i++){
+            var date = series_data[i].date;
+            var confirm = series_data[i].confirmed;
+            var recover = series_data[i].recovered;
+            var death = series_data[i].deaths;
+            dates.push(date);
+            confirmed.push(parseInt(confirm));
+            recovered.push(parseInt(recover));
+            deceased.push(parseInt(death));
+        }
+      var l=len_data-1;
+
+    rec.innerHTML=series_data[l].recovered;
+    rec_plus.innerHTML=parseInt(series_data[l].recovered)-parseInt(series_data[l-1].recovered);
+    rec_plus.innerHTML="+"+rec_plus.innerHTML;
+    
+    conf.innerHTML=series_data[l].confirmed;
+    conf_plus.innerHTML=parseInt(series_data[l].confirmed)-parseInt(series_data[l-1].confirmed);
+    conf_plus.innerHTML="+"+conf_plus.innerHTML;
+    
+    dec.innerHTML=series_data[l].deaths;
+    dec_plus.innerHTML=parseInt(series_data[l].deaths)-parseInt(series_data[l-1].deaths);
+    dec_plus.innerHTML="+"+dec_plus.innerHTML;
+
+     act.innerHTML=parseInt(series_data[l].confirmed)-parseInt(series_data[l].recovered);
+     act_plus.innerHTML="+"+parseInt(series_data[l].confirmed)-parseInt(series_data[l-1].confirmed)-parseInt(series_data[l].recovered)+parseInt(series_data[l-1].recovered);
+     act_plus.innerHTML="+"+act_plus.innerHTML;
+
+     dailrec=series_data[l].recovered-series_data[l-1].recovered;
+      dailconf=series_data[l].confirmed-series_data[l-1].confirmed;
+     daildec=series_data[l].deaths-series_data[l-1].deaths;
+     
+
+    }
+    getInfo();
+   
+ 
+
+
+var chart = new Chart(ctx, {
+    type: 'line',
+
+    data: 
+    {
+        labels: dates,
+        datasets: [{
+            label: 'Confirmed',
+            backgroundColor: 'rgba(75,192,192,0.2)',
+            borderColor: 'rgba(75,192, 192, 0.2)',
+            data: confirmed
+        },
+        {
+            label: 'Recovered',
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 0.2)',
+            data: recovered
+        },
+        {
+            label: 'Deceased',
+            backgroundColor:'rgba(255, 99, 132, 0.2)',
+            borderColor: 'rgba(255, 99, 132, 0.2)',
+            data: deceased
+        }
+      ]
+    },
+
+    // Configuration options go here
+     options: {
+            responsive: true,
+            maintainAspectRatio: true,
+
+           scales: {
+      xAxes: [{
+        gridLines: {
+          display: false,
+          drawBorder: false
+        }
+      }],
+      yAxes: [{
+        gridLines: {
+          color: "rgb(234, 236, 244)",
+          zeroLineColor: "rgb(234, 236, 244)",
+          drawBorder: false,
+          borderDash: [2],
+          zeroLineBorderDash: [2]
+        }
+      }]
+    }
+    }
+});
+</script>
+
+<script>
+//   console.log(parseInt(dailconf));
+  var a=parseInt(dailconf);
+  var b=parseInt(dailrec);
+  var c=parseInt(daildec);
+  
+  a=10;b=10;c=10;
+  var dataArray=[a,b,c];
+var ctx = document.getElementById("myappChart").getContext('2d');
+var myChart = new Chart(ctx, {
+  type: 'pie',
+  data: {
+    labels: ["Confirmed", "Recovered", "Deceased"],
+    datasets: [{
+      backgroundColor: [
+        "#17A2BB",
+        "#3498db",
+        "#FF6384"
+      ],
+      data:dataArray
+      // data: [parseInt(dailconf),parseInt(dailrec),parseInt(daildec)]
+    }]
+  }
+});
+</script>
+<script>
+  setTimeout(function(){ 
+    chart.update();
+    // console.log("chart initialized");
+    a=parseInt(dailconf);
+    // a=100;
+    dataArray=[parseInt(dailconf),parseInt(dailrec),parseInt(daildec)];
+    myChart.data.datasets[0].data=[];
+    myChart.data.datasets[0].data=dataArray;
+    
+    myChart.update();
+    // console.log(a) 
+    },
+    300
+    );
+
+  setInterval(function(){ chart.update();myChart.update();console.log("updated") }, 30000);
+
+</script>
+    
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://use.fontawesome.com/fcfefdb808.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="/js/country.js"></script>
+    <!-- <script src="/js/countrychart.js"></script> -->
+      <script>
+      // Prepare demo data
+// Data is joined to map using value of 'hc-key' property by default.
+// See API docs for 'joinBy' for more info on linking data and map.
+var data = [
+    ['fo', 0],
+    ['um', 1],
+    ['us', 2],
+    ['jp', 3],
+    ['sc', 4],
+    ['in', 5],
+    ['fr', 6],
+    ['fm', 7],
+    ['cn', 8],
+    ['sw', 9],
+    ['sh', 10],
+    ['br', 11],
+    ['ec', 12],
+    ['au', 13],
+    ['ki', 14],
+    ['ph', 15],
+    ['mx', 16],
+    ['es', 17],
+    ['bu', 18],
+    ['mv', 19],
+    ['sp', 20],
+    ['gb', 21],
+    ['gr', 22],
+    ['as', 23],
+    ['dk', 24],
+    ['gl', 25],
+    ['gu', 26],
+    ['mp', 27],
+    ['pr', 28],
+    ['vi', 29],
+    ['ca', 30],
+    ['st', 31],
+    ['tz', 32],
+    ['cv', 33],
+    ['dm', 34],
+    ['nl', 35],
+    ['jm', 36],
+    ['ws', 37],
+    ['om', 38],
+    ['vc', 39],
+    ['tr', 40],
+    ['bd', 41],
+    ['sb', 42],
+    ['lc', 43],
+    ['nr', 44],
+    ['no', 45],
+    ['kn', 46],
+    ['bh', 47],
+    ['to', 48],
+    ['fi', 49],
+    ['id', 50],
+    ['mu', 51],
+    ['se', 52],
+    ['tt', 53],
+    ['my', 54],
+    ['bs', 55],
+    ['pa', 56],
+    ['pw', 57],
+    ['tv', 58],
+    ['mh', 59],
+    ['cl', 60],
+    ['th', 61],
+    ['gd', 62],
+    ['ee', 63],
+    ['ag', 64],
+    ['tw', 65],
+    ['bb', 66],
+    ['it', 67],
+    ['mt', 68],
+    ['pg', 69],
+    ['de', 70],
+    ['vu', 71],
+    ['sg', 72],
+    ['cy', 73],
+    ['km', 74],
+    ['fj', 75],
+    ['ru', 76],
+    ['va', 77],
+    ['sm', 78],
+    ['kz', 79],
+    ['az', 80],
+    ['am', 81],
+    ['tj', 82],
+    ['ls', 83],
+    ['uz', 84],
+    ['pt', 85],
+    ['ma', 86],
+    ['co', 87],
+    ['tl', 88],
+    ['kh', 89],
+    ['ar', 90],
+    ['sa', 91],
+    ['pk', 92],
+    ['ye', 93],
+    ['ae', 94],
+    ['ke', 95],
+    ['pe', 96],
+    ['do', 97],
+    ['ht', 98],
+    ['ao', 99],
+    ['vn', 100],
+    ['mz', 101],
+    ['cr', 102],
+    ['ir', 103],
+    ['sv', 104],
+    ['sl', 105],
+    ['gw', 106],
+    ['hr', 107],
+    ['bz', 108],
+    ['za', 109],
+    ['cd', 110],
+    ['kw', 111],
+    ['ie', 112],
+    ['kp', 113],
+    ['kr', 114],
+    ['gy', 115],
+    ['hn', 116],
+    ['mm', 117],
+    ['ga', 118],
+    ['gq', 119],
+    ['ni', 120],
+    ['ug', 121],
+    ['mw', 122],
+    ['sx', 123],
+    ['tm', 124],
+    ['zm', 125],
+    ['nc', 126],
+    ['mr', 127],
+    ['dz', 128],
+    ['lt', 129],
+    ['et', 130],
+    ['sd', 131],
+    ['er', 132],
+    ['gh', 133],
+    ['si', 134],
+    ['gt', 135],
+    ['ba', 136],
+    ['jo', 137],
+    ['sy', 138],
+    ['mc', 139],
+    ['al', 140],
+    ['uy', 141],
+    ['cnm', 142],
+    ['mn', 143],
+    ['rw', 144],
+    ['so', 145],
+    ['bo', 146],
+    ['cm', 147],
+    ['cg', 148],
+    ['eh', 149],
+    ['rs', 150],
+    ['me', 151],
+    ['bj', 152],
+    ['ng', 153],
+    ['tg', 154],
+    ['la', 155],
+    ['af', 156],
+    ['ua', 157],
+    ['sk', 158],
+    ['jk', 159],
+    ['bg', 160],
+    ['qa', 161],
+    ['li', 162],
+    ['at', 163],
+    ['sz', 164],
+    ['hu', 165],
+    ['ro', 166],
+    ['lu', 167],
+    ['ad', 168],
+    ['ci', 169],
+    ['lr', 170],
+    ['bn', 171],
+    ['be', 172],
+    ['iq', 173],
+    ['ge', 174],
+    ['gm', 175],
+    ['ch', 176],
+    ['td', 177],
+    ['kv', 178],
+    ['lb', 179],
+    ['dj', 180],
+    ['bi', 181],
+    ['sr', 182],
+    ['il', 183],
+    ['ml', 184],
+    ['sn', 185],
+    ['gn', 186],
+    ['zw', 187],
+    ['pl', 188],
+    ['mk', 189],
+    ['py', 190],
+    ['by', 191],
+    ['lv', 192],
+    ['cz', 193],
+    ['bf', 194],
+    ['na', 195],
+    ['ne', 196],
+    ['ly', 197],
+    ['tn', 198],
+    ['bt', 199],
+    ['md', 200],
+    ['ss', 201],
+    ['cf', 202],
+    ['nz', 203],
+    ['cu', 204],
+    ['ve', 205],
+    ['mg', 206],
+    ['is', 207],
+    ['eg', 208],
+    ['lk', 209],
+    ['bw', 210],
+    ['kg', 211],
+    ['np', 212]
+];
+
+// Create the chart
+Highcharts.mapChart('container', {
+    chart: {
+        map: 'custom/world-highres'
+    },
+
+    title: {
+        text: 'Highmaps basic demo'
+    },
+
+    subtitle: {
+        text: 'Source map: <a href="http://code.highcharts.com/mapdata/custom/world-highres.js">World, Miller projection, high resolution</a>'
+    },
+
+    mapNavigation: {
+        enabled: true,
+        buttonOptions: {
+            verticalAlign: 'bottom'
+        }
+    },
+
+    colorAxis: {
+        min: 0
+    },
+
+    series: [{
+        data: data,
+        name: 'Random data',
+        states: {
+            hover: {
+                color: '#BADA55'
+            }
+        },
+        dataLabels: {
+            enabled: true,
+            format: '{point.name}'
+        }
+    }]
+});
+</script>
+</body>
+</html>

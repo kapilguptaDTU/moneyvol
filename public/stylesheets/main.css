@@ -1,0 +1,690 @@
+@font-face {
+    font-family: Vollkorn;
+    src: url(/monitor/static/fonts/Vollkorn-Regular.ttf);
+  }
+  
+  @font-face {
+    font-family: OpenSans;
+    src: url(/monitor/static/fonts/OpenSans-Regular.ttf);
+  }
+  
+  html, body, .sqzme-container {
+    background-color: #fafbfc;
+    height: 100%;
+    font-family: Vollkorn;
+  }
+  
+  body > .sqzme-container {
+    height: auto;
+    min-height: 100%;
+  }
+  
+  hr {
+    border: 0;
+    height: 1px !important;
+    background: #333;
+    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+  }
+  
+  hr.footer {
+    background-image: linear-gradient(to right, rgb(220,220,220), #666, rgb(220,220,220));
+  }
+  
+  h3,h4,h5 {
+    font-family: OpenSans;
+    letter-spacing: -1px;
+  }
+  
+  h1, h2 {
+    font-family: Vollkorn;
+  }
+  
+  .pure-g [class*="pure-u"]{
+    font-family: Vollkorn !important;
+  }
+  
+  .pure-button {
+    padding: 0.3em 1em !important;
+  }
+  
+  /*
+   * The field-with-error class is defined by Mojolicious.
+   */
+  
+  input.field-with-error,
+  select.field-with-error,
+  textarea.field-with-error {
+    background-color: pink;
+  }
+  
+  /*
+   * The form-error class comes from Mojolicious.
+   */
+  
+  .form-error {
+    padding: 10px;
+    margin: 10px 0;
+    background-color: pink;
+    border: 1px solid red;
+  }
+  
+  .sqzme-container {
+  }
+  
+  /*
+   * Navigation stuff.
+  */
+  
+  .sqzme-navigation {
+    margin-bottom: 1em;
+    height: 2.1em;
+    position: fixed;
+    width: 100%;
+    overflow: hidden;
+    transition: height 0.5s;
+    background-color: rgba(242,245,247,0.9);
+    z-index: 4;
+    top: 0;
+    box-shadow: 0 2px 2px rgba(92, 119, 138, 0.2);
+  }
+  
+  .pure-menu-link {
+    font-family: OpenSans;
+    font-size: 0.9em;
+  }
+  
+  .pure-menu-link:hover {
+    color: black !important;
+    background-color: white !important;
+  }
+  
+  .pure-menu-link:focus {
+    background-color: white !important;
+  }
+  
+  .sqzme-navigation.open {
+    height: 16em;
+  }
+  
+  .custom-menu-3 {
+    text-align: right;
+  }
+  
+  .sqzme-yellow {
+    color: gold;
+  }
+  
+  .custom-toggle {
+      width: 34px;
+      height: 34px;
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      display: none;
+  }
+  
+  .custom-toggle .bar {
+      background-color: #777;
+      display: block;
+      width: 20px;
+      height: 2px;
+      border-radius: 100px;
+      position: absolute;
+      top: 18px;
+      right: 7px;
+      -webkit-transition: all 0.5s;
+      -moz-transition: all 0.5s;
+      -ms-transition: all 0.5s;
+      transition: all 0.5s;
+  }
+  
+  .custom-toggle .bar:first-child {
+      -webkit-transform: translateY(-6px);
+      -moz-transform: translateY(-6px);
+      -ms-transform: translateY(-6px);
+      transform: translateY(-6px);
+  }
+  
+  .custom-toggle.x .bar {
+      -webkit-transform: rotate(45deg);
+      -moz-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+  }
+  
+  .custom-toggle.x .bar:first-child {
+      -webkit-transform: rotate(-45deg);
+      -moz-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+  }
+  
+  @media (max-width: 47.999em) {
+  
+      .custom-menu-3 {
+          text-align: left;
+      }
+  
+      .custom-toggle {
+          display: block;
+      }
+  }
+  
+  /*
+   * Content stuff.
+   */
+  
+  .sqzme-content {
+    padding: 32px 5px 6em 20px;  /* part of the footer setup */
+  }
+  
+  /*
+   * Plans page.
+   */
+  
+  .sqzme-plan-tables {
+    max-width: 48em;
+    margin: 0 auto;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    text-align: center;
+  }
+  
+  
+  h1.sqzme-plan-narrow {
+    font-variant: small-caps;
+    font-weight: 100;
+  }
+  
+  .sqzme-plan-table {
+    border: 1px solid #ddd;
+    margin: 0 0.5em 2em;
+    padding: 0 0 3em;
+  }
+  
+  .sqzme-plan-table-pass .sqzme-plan-table-header {
+    background: hsl(88,51%,66%);
+  }
+  
+  .sqzme-plan-table-basic .sqzme-plan-table-header {
+    background: hsl(195,66%,35%);
+  }
+  
+  .sqzme-plan-table-premium .sqzme-plan-table-header {
+    background: hsl(235,66%,25%);
+  }
+  
+  .sqzme-plan-table-header {
+    background: #111;
+    color: #fff;
+  }
+      .sqzme-plan-table-header h1 {
+        margin: 0;
+        padding-top: 1em;
+        font-size: 2em;
+        font-weight: normal;
+      }
+  
+  .sqzme-plan-table-price {
+    font-size: 5em;
+    margin: 0.2em 0 0;
+    font-weight: 100;
+  }
+      .sqzme-plan-table-price span {
+        display: block;
+        text-transform: uppercase;
+        font-size: 0.2em;
+        padding-bottom: 2em;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.5);
+        *color: #fff;
+      }
+  
+  .sqzme-plan-table-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+  
+  .sqzme-plan-table-list li {
+    padding: 0.8em 0;
+    background: #f7f7f7;
+    border-bottom: 1px solid #e7e7e7;
+  }
+  
+  .sqzme-plan-table-list .dead {
+    color: lightgray;
+    text-decoration: line-through;
+  }
+  
+  .sqzme-plan-button {
+    padding: 0.15em 0.75em 0.15em 0.75em !important;
+    position: relative;
+    bottom: -1.5em;
+    border-radius: 2em !important;
+    background: hsl(195,66%,35%) !important;
+  }
+  
+  .sqzme-plan-information {
+    max-width: 48em;
+    margin: 0 auto;
+    line-height: 190%;
+  }
+  
+  .sqzme-plan-padded-box {
+    padding: 0em 1em 0.5em 1em;
+  }
+  
+  .sqzme-plan-information-head {
+    color: black;
+    font-weight: 600;
+  }
+  
+  .sqzme-benefits-wrapper {
+    max-width: 48em;
+    margin: 0 auto;
+  }
+  
+  .benefits-tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    color: blue;
+  }
+  
+  .benefits-tooltip .benefits-tooltip-text {
+    visibility: hidden;
+    width: 275px;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -200px;
+    background-color: white;
+    box-shadow: 2px 2px 8px gray;
+    font-family: OpenSans;
+    color: black;
+    text-align: center;
+    padding: 15px 15px;
+    border-radius: 6px;
+    line-height: 120%;
+   
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+  }
+  
+  .benefits-tooltip:hover .benefits-tooltip-text {
+    visibility: visible;
+  }
+  
+  @media screen and (max-width: 48em) {
+    .benefits-tooltip {
+      display: none !important;
+    }
+  }
+  
+  .sqzme-tryit-button-container {
+    max-width: 48em;
+    text-align: center;
+    margin: 0 auto;
+  }
+  
+  .anchor {
+    padding-top: 50px;
+  }
+  
+  a.docs {
+    color: inherit;  /* no more blue */
+    font-variant: small-caps;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition-duration: 0.5s;
+    transition-property: background;
+  }
+  
+  a.docs:hover {
+    background: #f7f9ec;
+    border-radius: 5px;
+  }
+  
+  a.xlink {
+    color: inherit;
+    text-decoration: none;
+    transition-duration: 0.5s;
+    transition-property: background;
+  }
+  
+  a.xlink::after { 
+    color: blue;
+    font-family: FontAwesome;
+    content: "\f08e";
+    font-size: 50%;
+    margin-left: 0.1em;
+    position: relative;
+    top: -0.6em;
+  }
+  
+  a.xlink:hover {
+    background: #ecf1f9;
+    border-radius: 5px;
+  }
+  
+  a.link {
+    color: inherit;
+    font-variant: small-caps;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition-duration: 0.5s;
+    transition-property: background;
+  }
+  
+  a.link:hover {
+    background: #f7f9ec;
+    border-radius: 5px;
+  }
+  
+  li {
+    padding-left: 0.5em;
+  }
+  
+  .sqzme-faq-wrapper {
+    max-width: 48em;
+    margin: 0 auto;
+  }
+  
+  .sqzme-faq-padded-box {
+    padding: 0.5em 1.5em 0.5em 1.5em;
+    margin: 0 1em 0 1em;
+  }
+  
+  .sqzme-faq-padded-box.gray {
+    font-size: 15px;
+    font-family: OpenSans;
+    text-align: justify;
+    hyphens: auto;
+    line-height: 145%;
+    background: white;
+    box-shadow: inset 1px 1px 2px rgba(0,0,0,0.2);
+    border-radius: 8px;
+    opacity: 50%;
+  }
+  
+  /*
+   * Footer.
+   */
+  
+  .sqzme-splash-footer { /* needs p text-align:center to work */
+    margin: 0 auto;
+    position: fixed;
+    width: 200px;
+    height: 50px;
+    left: 50%;
+    bottom: 0;
+    margin-top: -25px;
+    margin-left: -100px;
+    font-size: 15px;
+    color: rgb(77,77,77); /* for the pipe-delimiters */
+  }
+  
+  .sqzme-footer {
+    background-image: linear-gradient(to top, #d7dfe3 0%, #fafbfc 100%);
+    clear: both;
+    position: relative;
+    z-index: 10;
+    height: 20em;
+    margin-top: -3em;
+  }
+  
+  .sqzme-footer-links {
+    padding: 2em 2em 0em 2em;
+  }
+  
+  .sqzme-footer-left {
+    float: left;
+    width: 45%;
+  }
+   
+  .sqzme-footer-right {
+    float: right;
+    width: 50%;
+    font-family: OpenSans;
+  }
+  
+  @media (min-width: 48em) {
+    .sqzme-footer-right {
+    width: 25%;
+    }
+  }
+  
+  .sqzme-footer-logo {
+    margin-bottom: 3em;
+    text-align: right;
+  }
+  
+  .sqzme-footer-copyright {
+    text-align: right;
+    color: #777;
+  }
+  
+  .sqzme-stealth-link {
+    color: #000;
+    text-decoration: none; /* get rid of weird line artifact */
+  }
+  
+  .sqzme-flash-message {
+    background-color: lightgreen;
+    border-style: none;
+    width: 100%;
+    position: fixed;
+    top: 30px;
+  }
+  
+  .sqzme-flash-message.notice {
+    background-color: yellow;
+    border-style: none;
+  }
+  
+  .sqzme-flash-message.notice {
+    background-color: pink;
+    border-style: none;
+  }
+  
+  .sqzme-flash-message > p {
+    font-family: OpenSans;
+    text-align: center;
+  }
+  
+  /*
+   * Dashboard
+   */
+  
+  .sqzme-dash-button {
+    font-family: Vollkorn !important;
+    padding: 0.25em 0.5em 0em 0.5em !important;
+  }
+  
+  .sqzme-dash-table {
+    border-collapse: separate !important;
+    border: 0px !important;
+    font-family: OpenSans;
+    width: 100%;
+  }
+  
+  td.last-price-td {
+    width: 10%;
+  }
+  
+  td.quick-look-td {
+    width: 25%;
+  }
+  
+  .dash-svg-box {
+    width: 100%;
+    height: 0px;  /* needs to be declared for smooth transition */
+    margin: auto;
+  }
+  
+  .pure-table thead {
+    background-color: transparent !important;
+  }
+  
+  .pure-table-striped tr:nth-child(2n-1) td {
+    background-color: hsl(195,66%,95%) !important;
+  }
+  
+  .pure-table-research-up-striped tr:nth-child(2n-1) td {
+    background-color: hsl(215,66%,85%) !important;
+  }
+  
+  .pure-table-research-down-striped tr:nth-child(2n-1) td {
+    background-color: hsl(195,66%,90%) !important;
+  }
+  
+  .pure-table td, .pure-table th {
+    border-width: 0 !important;
+  }
+  
+  .sqzme-dash-table th {
+    font-weight: 100;
+    font-variant: small-caps;
+  }
+  
+  .sqzme-dash-table td {
+    word-wrap: break-word;
+    max-width: 150px;
+  }
+  
+  @media (max-width: 48em) {
+    .sqzme-dash-disappear {
+       display: none;
+    }
+  }
+  
+  .quick-look {
+    cursor: pointer;
+  }
+  
+  td > div.sqzme-alert-type-name {
+    display: inline-block;
+    min-width: 90px;
+  }
+  
+  @media (max-width: 48em) {
+    .sqzme-alert-type-name {
+       display: none !important;
+    }
+  }
+  
+  .sqzme-chart-padded-box {
+    padding: 0.5em 1em 0.5em 0em;
+    margin: 0em 0em 0em 2em;
+  }
+  
+  #up-tab {
+    width: 50%;
+    float: left;
+    text-align: center;
+    background-color: hsl(215,66%,85%); 
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    cursor: pointer;
+  }
+  
+  #down-tab {
+    width: 50%;
+    float: right;
+    text-align: center;
+    background-color: hsl(195,66%,90%); 
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: inset 1px -3px 3px rgba(0,0,0,0.1);
+    cursor: pointer;
+  }
+  
+  .sqzme-research-links {
+    padding-top: 2.5em;
+    padding-bottom: 3.5em;
+    padding-left: 2%;
+    text-align: center;
+  }
+  
+  .sqzme-research-links a {
+    text-decoration: none;
+    color: white;
+  }
+  
+  .sqzme-research-links-each-small {
+    padding: 0 0em 0 0;
+    display: none;
+  }
+  
+  .sqzme-research-links-each-large {
+    padding: 0 0.5em 0 0.5em;
+    border-radius: 10px;
+    display: inline;
+    background: gray;
+  }
+  
+  @media (max-width: 48em) {
+    .sqzme-research-links a {
+      color: gray;
+    }
+    .sqzme-research-links-each-small {
+      display: inline;
+    }
+    .sqzme-research-links-each-large {
+      display: none;
+    }
+  }
+  
+  .sqzme-research-table {
+    border-collapse: separate !important;
+    width: 100%;
+  }
+  
+  .sqzme-research-table th {
+    font-weight: 100;
+    font-variant: small-caps;
+  }
+  
+  .sqzme-research-table td {
+    word-wrap: break-word;
+    max-width: 150px;
+  }
+  
+  @media (max-width: 48em) {
+    .sqzme-research-disappear {
+       display: none;
+    }
+  }
+  
+  select.sqzme-ticker-select {
+    width: 20%;
+  }
+  
+  .sqzme-accounts-wrapper {
+    max-width: 48em;
+    margin: 0 auto;
+  }
+  
+  .sqzme-accounts-button {
+    padding: 0.3em 1em 0.3em 1em !important;
+    background: hsl(235,66%,25%) !important;
+    color: white !important;
+    border-radius: 5px !important;
+  }
+  
+  .sqzme-accounts-button:hover {
+    background-image: linear-gradient(transparent, rgba(0,0,0,0.25) 40%, rgba(0,0,0,0.1)) !important;
+  }
+  
+  .sqzme-billing-button {
+    border-radius: 15px !important;
+    padding: 0.15em 0.6em 0.15em 0.6em !important;
+    margin-left: 0.25em !important;
+  }
+  
+  .sqzme-billing-invoices-table {
+    width: 100%;
+  }
