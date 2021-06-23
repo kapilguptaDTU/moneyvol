@@ -106,7 +106,6 @@ app.get('/', function (req, res) {
 
   
 app.listen(process.env.PORT,process.env.IP);
-console.log("IMDb V2 started"+process.env);
 
 
 // app.listen(3000, () => {
