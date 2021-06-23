@@ -105,11 +105,11 @@ app.get('/', function (req, res) {
 
 
   
-// app.listen(process.env.PORT,process.env.IP);
-// console.log("IMDb V2 started"+process.env);
+app.listen(process.env.PORT,process.env.IP);
+console.log("IMDb V2 started"+process.env);
 
 
-app.listen(3000, () => {
-    console.log('Express server started at port 3000');
+// app.listen(3000, () => {
+//     console.log('Express server started at port 3000');
 
-});
+// });
