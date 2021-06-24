@@ -34,6 +34,24 @@ function niftydata(){
     return data;
   }
 
+  function niftydata_SHEET3(){
+    const file = reader.readFile('./main_data.csv')
+      
+    let data = []
+      
+    const sheets = file.SheetNames
+      // console.log(sheets)
+  
+   
+       const temp = reader.utils.sheet_to_json(
+            file.Sheets[file.SheetNames[2]])
+       temp.forEach((res) => {
+          data.push(res)
+       })
+    
+      return data;
+    }
+
   function niftydata_strangle(){
     const file = reader.readFile('./main_data.csv')
       
@@ -75,7 +93,7 @@ function niftydata(){
 
     app.get('/niftyvol',async function (req, res) {
 
-      var data_nifty=await niftydata()
+      var data_nifty=await niftydata_SHEET3()
       console.log("getting nifty vol")
       res.render('nifty_vol',{data_nifty:data_nifty});
     });
@@ -94,7 +112,7 @@ function niftydata(){
 
 app.get('/', function (req, res) {
   console.log("getting main page home")
-  res.render('sqzme');
+  res.render('HOME_PAGE');
 });
 
 

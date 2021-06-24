@@ -82,7 +82,7 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="h4 text-xs font-weight-bold text-info text-uppercase mb-1">SPOT NIFTY</div>
+                      <div class="h4 text-xs font-weight-bold text-info text-uppercase mb-1">NIFTY</div>
                       <div class="h4 mb-0 font-weight-bold text-gray-800 ml-4" >
                           <span id="conf"></span>
                         <span class="deltaconfirmed badge badge-light">
@@ -104,7 +104,7 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="h4 text-xs font-weight-bold text-info text-uppercase mb-1">REALIZED VOL</div>
+                      <div class="h4 text-xs font-weight-bold text-info text-uppercase mb-1">CAPTURED NEUTRAL STRADDLE</div>
                       <div class="h4 mb-0 font-weight-bold text-gray-800 ml-4" >
                           <span id="act"></span>
                         <span class="deltaconfirmed badge badge-light">
@@ -127,7 +127,7 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="h4 text-xs font-weight-bold text-info text-uppercase mb-1" >IMPLIED VOL</div>
+                      <div class="h4 text-xs font-weight-bold text-info text-uppercase mb-1" >STATED NEUTRAL STRADDLE</div>
                       <div class="h4 mb-0 font-weight-bold text-gray-800 ml-4"  >
                           <span id="rec"></span>
                         <span class="deltaconfirmed badge badge-light">
@@ -144,7 +144,7 @@
               </div>
             </div>
                                                             
-            <div class="col-xl-3 col-md-6 mb-4">
+            <div class="col-xl-3 col-md-6 mb-4" style="display: none;">
               <div class="card border-left border-danger shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
@@ -228,17 +228,20 @@ var times = [];
             times.push(row['TIME_STRING'])
             decay_our_straddle.push(row['DECAY OF OUR STRADDLE'])
             decay_ratio_straddle.push(row['DECAY OF RATIO STRADDLE'])
-            spot_price.push(row['SPOT PRICE'])
+            spot_price.push(row['SPOT FROM 0'])
           });
        times= times.slice(1,100)
        decay_our_straddle= decay_our_straddle.slice(1,100)
        decay_ratio_straddle= decay_ratio_straddle.slice(1,100)
        spot_price= spot_price.slice(1,100)
        a=spot_price[spot_price.length-1]
-       conf.innerHTML=a
+       a=a.toFixed(2)
+       conf.innerHTML=rawdata[spot_price.length-1]['SPOT PRICE']
        b=decay_our_straddle[spot_price.length-1]
+       b=b.toFixed(2)
        act.innerHTML=b
        c=decay_ratio_straddle[spot_price.length-1]
+       c=c.toFixed(2)
        rec.innerHTML=c   
        d= parseFloat(act.innerHTML)-parseFloat(rec.innerHTML)
        dec.innerHTML=d
@@ -253,14 +256,14 @@ var chart = new Chart(ctx, {
     {
         labels: times,
         datasets: [{
-            label: 'REALIZED DECAY',
+            label: 'CAPTURED NEUTRAL STRADDLE',
             backgroundColor: 'rgba(75,192,192,0.6)',
             borderColor: 'rgba(75,192, 192, 0.6)',
             data: decay_our_straddle,
             yAxisID: 'y-axis-1'
         },
         {
-            label: 'IMPLIED DECAY',
+            label: 'STATED NEUTRA STRADDLE',
             backgroundColor: 'rgba(54, 162, 235, 0.6)',
             borderColor: 'rgba(54, 162, 235, 0.6)',
             data: decay_ratio_straddle,
@@ -272,7 +275,7 @@ var chart = new Chart(ctx, {
             borderColor: 'rgba(255, 99, 132)',
             data: spot_price,
             fill:false,
-            yAxisID: 'y-axis-2'
+            yAxisID: 'y-axis-1'
         }
       ]
     },
@@ -302,35 +305,22 @@ var chart = new Chart(ctx, {
           zeroLineBorderDash: [2]
         }
       },
-      {
-        type: "linear",
-                    display: true,
-                    position: "right",
-                    id: "y-axis-2",
-        gridLines: {
-          color: "rgb(234, 236, 244)",
-          zeroLineColor: "rgb(234, 236, 244)",
-          drawBorder: false,
-          borderDash: [2],
-          zeroLineBorderDash: [2]
-        }
-      }
+      
     ]
     }
     }
 });
   // a=10;b=10;c=10;
-  var dataArray=[b,c,d];
+  var dataArray=[b,c];
 var ctx2 = document.getElementById("myappChart").getContext('2d');
 var myChart2 = new Chart(ctx2, {
   type: 'pie',
   data: {
-    labels: ["REALIZED VOL", "IMPLIED VOL", "DIFFERENCE"],
+    labels: ["CAPTURED NEUTRAL STRADDLE", "STATED NEUTRAL STRADDLE"],
     datasets: [{
       backgroundColor: [
         "#17A2BB",
-        "#3498db",
-        "#FF6384"
+        "#3498db"
       ],
       data:dataArray
       // data: [parseInt(dailconf),parseInt(dailrec),parseInt(daildec)]
