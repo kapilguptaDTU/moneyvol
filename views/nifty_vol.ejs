@@ -257,14 +257,14 @@ var chart = new Chart(ctx, {
         labels: times,
         datasets: [{
             label: 'CAPTURED NEUTRAL STRADDLE',
-            backgroundColor: 'rgba(75,192,192,0.6)',
+            backgroundColor: '#00b0cc',
             borderColor: 'rgba(75,192, 192, 0.6)',
             data: decay_our_straddle,
             yAxisID: 'y-axis-1'
         },
         {
             label: 'STATED NEUTRA STRADDLE',
-            backgroundColor: 'rgba(54, 162, 235, 0.6)',
+            backgroundColor: "#f44336",
             borderColor: 'rgba(54, 162, 235, 0.6)',
             data: decay_ratio_straddle,
             yAxisID: 'y-axis-1'
@@ -320,7 +320,7 @@ var myChart2 = new Chart(ctx2, {
     datasets: [{
       backgroundColor: [
         "#17A2BB",
-        "#3498db"
+        "#f44336"
       ],
       data:dataArray
       // data: [parseInt(dailconf),parseInt(dailrec),parseInt(daildec)]
