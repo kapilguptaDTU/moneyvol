@@ -100,7 +100,7 @@ function niftydata(){
 
     app.get('/niftyvomma',async function (req, res) {
 
-      var data_nifty=await niftydata()
+      var data_nifty=await niftydata_SHEET3()
       console.log("getting nifty vomma")
       res.render('nifty_vomma',{data_nifty:data_nifty});
     });

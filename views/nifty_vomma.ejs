@@ -244,8 +244,8 @@ var times = [];
     async function getData(){
       rawdata.forEach(row => {
             times.push(row['TIME_STRING'])
-            vomma.push(row['Vomma'])
-            vomma_30_mean.push(row['Difference of vomma from mean'])
+            vomma.push(row['VOMMA'])
+            vomma_30_mean.push(row['VOMMA 30 MEAN'])
             spot_price.push(row['SPOT PRICE'])
           });
        times= times.slice(1,100)
